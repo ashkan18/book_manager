@@ -8,17 +8,22 @@ class BookReader(object):
 
     VALID_SEPARATORS = ['/', '|', ',']
 
-    def __init__(self, file_name, filter=None, year=False, reverse=False):
+    def __init__(self, file_name, filter=None, order_by_year=False, reverse=False):
         super(BookReader, self).__init__()
 
         self.file_name = file_name
         self.filter_func = (lambda x: filter in x) if filter else None
-        self.order_by_year = year
+        self.order_by_year = order_by_year
         self.reverse = reverse
 
         self.delimiter = None
+        # the key of the hash is last_name, value list of book line numbers with that last name
         self.last_name_hash = {}
+
+        # the key of the hash is published year, value is list of book line numbers published in that year
         self.year_hash = {}
+
+        # the key of this hash is line number, the value is the book
         self.data_hash = {}
 
     def process_file(self):
@@ -142,7 +147,7 @@ def main(argv):
 
     book_reader = BookReader(file_name=file_name,
                              filter=filter,
-                             year=order_by_year,
+                             order_by_year=order_by_year,
                              reverse=reverse)
     book_reader.process_file()
 

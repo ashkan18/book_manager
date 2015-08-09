@@ -6,7 +6,7 @@ import unittest
 
 class TestBookReader(unittest.TestCase):
     def setUp(self):
-        self.book_reader = BookReader(file_name='pipe', year=False, reverse=True)
+        self.book_reader = BookReader(file_name='pipe', order_by_year=False, reverse=True)
 
     def test_line_process_pipe(self):
         pipe_data = " F |L|T|D\n"
@@ -76,7 +76,7 @@ class TestBookReader(unittest.TestCase):
             self.assertEqual(last_name, book_reader.data_hash[sorted_list[index]].last_name)
 
     def test_read_file_year(self):
-        book_reader = BookReader(file_name='pipe', year=True)
+        book_reader = BookReader(file_name='pipe', order_by_year=True)
         book_reader._read_file()
         sorted_list = book_reader._get_sorted_lines_list()
 
@@ -85,7 +85,7 @@ class TestBookReader(unittest.TestCase):
             self.assertEqual(last_name, book_reader.data_hash[sorted_list[index]].last_name)
 
     def test_read_file_year_reverse(self):
-        book_reader = BookReader(file_name='pipe', year=True, reverse=True)
+        book_reader = BookReader(file_name='pipe', order_by_year=True, reverse=True)
         book_reader._read_file()
         sorted_list = book_reader._get_sorted_lines_list()
 
